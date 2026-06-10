@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced DevOps Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #visitor-count {
+            font-size: 24px;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced DevOps Project</h1>
+    <p>Frontend Container Running Successfully 🚀</p>
+    <div id="visitor-count">Loading visitors...</div>
+
+    <script>
+        async function fetchVisitors() {
+            try {
+                const response = await fetch('/api');
+                const data = await response.json();
+
+                // Update the visitor count in the page
+                document.getElementById('visitor-count').innerText =
+                    "Total Visitors: " + data.visitors;
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('visitor-count').innerText =
+                    "Error loading visitors";
+            }
+        }
+
+        // Fetch visitors immediately on load
+        fetchVisitors();
+
+        // Update every 5 seconds
+        setInterval(fetchVisitors, 5000);
+    </script>
+</body>
+</html>
